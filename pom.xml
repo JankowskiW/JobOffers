@@ -20,7 +20,7 @@
         <java.version>17</java.version>
         <junit-jupiter-engine.version>5.9.2</junit-jupiter-engine.version>
         <assertj-core.version>3.24.2</assertj-core.version>
-        <mockito-core.version>5.1.1</mockito-core.version>
+        <mockito-core.version>5.2.0</mockito-core.version>
         <testcontainers.version>1.17.6</testcontainers.version>
         <wiremock-jre8.version>2.35.0</wiremock-jre8.version>
     </properties>
@@ -39,14 +39,19 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
