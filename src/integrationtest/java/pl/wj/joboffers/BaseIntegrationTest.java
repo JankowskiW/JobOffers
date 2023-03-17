@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testcontainers.utility.DockerImageName;
 
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
@@ -25,10 +25,10 @@ public class BaseIntegrationTest {
     private static final String WIRE_MOCK_HOST = "http://127.0.0.1";
 
     @Autowired
-    public MockMvc mockMvc;
+    protected MockMvc mockMvc;
 
     @Autowired
-    public ObjectMapper objectMapper;
+    protected ObjectMapper objectMapper;
 
     @Container
     public static final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
