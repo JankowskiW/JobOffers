@@ -5,11 +5,9 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import pl.wj.joboffers.domain.remotejobofferretriever.model.RemoteJobOffer;
+import pl.wj.joboffers.domain.remotejobofferretriever.model.dto.RemoteJobOfferDto;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @RequiredArgsConstructor
@@ -19,14 +17,16 @@ public class RemoteJobOfferHttpRetriever implements RemoteJobOfferRetriever {
     private final int port;
 
     @Override
-    public Set<RemoteJobOffer> retrieveRemoteJobOffers() {
+    public Set<RemoteJobOfferDto> retrieveRemoteJobOffers() {
+        System.out.println("URI = " + uri);
+        System.out.println("PORT = " + port);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         final HttpEntity<HttpHeaders> requestEntity = new HttpEntity<>(headers);
         final String url = UriComponentsBuilder.fromHttpUrl(createServiceURL("/job-offers"))
                 .queryParam("someparam", "someValue")
                 .toUriString();
-        ResponseEntity<Set<RemoteJobOffer>> response = restTemplate.exchange(
+        ResponseEntity<Set<RemoteJobOfferDto>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 requestEntity,
@@ -39,8 +39,8 @@ public class RemoteJobOfferHttpRetriever implements RemoteJobOfferRetriever {
         return String.format("%s:%s%s", uri, port, servicePath);
     }
 
-    private Set<RemoteJobOffer> getBodyOrEmptySet(ResponseEntity<Set<RemoteJobOffer>> response) {
-        Set<RemoteJobOffer> remoteJobOffers = new HashSet<>();
+    private Set<RemoteJobOfferDto> getBodyOrEmptySet(ResponseEntity<Set<RemoteJobOfferDto>> response) {
+        Set<RemoteJobOfferDto> remoteJobOffers = new HashSet<>();
         if (response.getBody() != null) {
             remoteJobOffers = new HashSet<>(response.getBody());
         }

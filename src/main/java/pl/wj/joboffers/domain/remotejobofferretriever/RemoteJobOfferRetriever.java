@@ -1,9 +1,9 @@
 package pl.wj.joboffers.domain.remotejobofferretriever;
 
-import pl.wj.joboffers.domain.remotejobofferretriever.model.RemoteJobOffer;
+import pl.wj.joboffers.domain.remotejobofferretriever.model.dto.RemoteJobOfferDto;
 
 import java.util.Set;
 
 public interface RemoteJobOfferRetriever {
-    Set<RemoteJobOffer> retrieveRemoteJobOffers();
+    Set<RemoteJobOfferDto> retrieveRemoteJobOffers();
 }
