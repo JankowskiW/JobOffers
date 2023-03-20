@@ -1,4 +1,4 @@
-package pl.wj.joboffers.domain.JobOffer.model;
+package pl.wj.joboffers.domain.joboffer.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
