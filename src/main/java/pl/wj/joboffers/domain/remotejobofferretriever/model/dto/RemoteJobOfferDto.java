@@ -1,4 +1,5 @@
 package pl.wj.joboffers.domain.remotejobofferretriever.model.dto;
 
-public class RemoteJobOfferDto {
-}
+import lombok.ToString;
+
+public record RemoteJobOfferDto(String title, String company, String salary, String offerUrl) { }

@@ -1,5 +1,7 @@
 package pl.wj.joboffers.domain.remotejobofferretriever;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -18,13 +20,10 @@ public class RemoteJobOfferHttpRetriever implements RemoteJobOfferRetriever {
 
     @Override
     public Set<RemoteJobOfferDto> retrieveRemoteJobOffers() {
-        System.out.println("URI = " + uri);
-        System.out.println("PORT = " + port);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         final HttpEntity<HttpHeaders> requestEntity = new HttpEntity<>(headers);
-        final String url = UriComponentsBuilder.fromHttpUrl(createServiceURL("/job-offers"))
-                .queryParam("someparam", "someValue")
+        final String url = UriComponentsBuilder.fromHttpUrl(createServiceURL("/offers"))
                 .toUriString();
         ResponseEntity<Set<RemoteJobOfferDto>> response = restTemplate.exchange(
                 url,
