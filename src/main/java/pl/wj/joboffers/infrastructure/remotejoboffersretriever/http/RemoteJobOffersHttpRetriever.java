@@ -1,17 +1,17 @@
-package pl.wj.joboffers.domain.remotejobofferretriever;
+package pl.wj.joboffers.infrastructure.remotejoboffersretriever.http;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import pl.wj.joboffers.domain.remotejobofferretriever.model.dto.RemoteJobOfferDto;
+import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.model.dto.RemoteJobOfferDto;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @RequiredArgsConstructor
-public class RemoteJobOfferHttpRetriever implements RemoteJobOfferRetriever {
+public class RemoteJobOffersHttpRetriever implements RemoteJobOffersRetriever {
     private final RestTemplate restTemplate;
     private final String uri;
     private final int port;

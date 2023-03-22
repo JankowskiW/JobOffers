@@ -2,27 +2,26 @@ package pl.wj.joboffers.feature.remotejobofferretriever;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.client.WireMock;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.wj.joboffers.BaseIntegrationTest;
-import pl.wj.joboffers.domain.remotejobofferretriever.RemoteJobOfferRetriever;
-import pl.wj.joboffers.domain.remotejobofferretriever.model.dto.RemoteJobOfferDto;
+import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.RemoteJobOffersRetriever;
+import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.model.dto.RemoteJobOfferDto;
 
 import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class RemoteJobOfferHttpRetrieverIntegrationTest extends BaseIntegrationTest {
+public class RemoteJobOffersHttpRetrieverIntegrationTest extends BaseIntegrationTest {
     private final RemoteJobOfferRetrieverIntegrationTestHelper helper;
-    private final RemoteJobOfferRetriever remoteJobOfferRetriever;
+    private final RemoteJobOffersRetriever remoteJobOffersRetriever;
 
     @Autowired
-    public RemoteJobOfferHttpRetrieverIntegrationTest(ObjectMapper objectMapper, MockMvc mockMvc, RemoteJobOfferRetriever remoteJobOfferRetriever, RemoteJobOfferRetrieverIntegrationTestHelper helper) {
+    public RemoteJobOffersHttpRetrieverIntegrationTest(ObjectMapper objectMapper, MockMvc mockMvc, RemoteJobOffersRetriever remoteJobOffersRetriever, RemoteJobOfferRetrieverIntegrationTestHelper helper) {
         super(objectMapper, mockMvc);
-        this.remoteJobOfferRetriever = remoteJobOfferRetriever;
+        this.remoteJobOffersRetriever = remoteJobOffersRetriever;
         this.helper = helper;
     }
 
@@ -38,7 +37,7 @@ public class RemoteJobOfferHttpRetrieverIntegrationTest extends BaseIntegrationT
                                 .withBody(helper.createBodyWithSomeJobOffers())));
 
         // when
-        Set<RemoteJobOfferDto> response = remoteJobOfferRetriever.retrieveRemoteJobOffers();
+        Set<RemoteJobOfferDto> response = remoteJobOffersRetriever.retrieveRemoteJobOffers();
 
         // then
         assertThat(response)
