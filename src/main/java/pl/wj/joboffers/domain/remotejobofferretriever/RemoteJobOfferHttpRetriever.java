@@ -1,7 +1,5 @@
 package pl.wj.joboffers.domain.remotejobofferretriever;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -18,20 +16,24 @@ public class RemoteJobOfferHttpRetriever implements RemoteJobOfferRetriever {
     private final String uri;
     private final int port;
 
+    private static final String SERVICE_PATH = "/offers";
+
     @Override
     public Set<RemoteJobOfferDto> retrieveRemoteJobOffers() {
+        ResponseEntity<Set<RemoteJobOfferDto>> response = executeGetRequest(SERVICE_PATH);
+        return getBodyOrEmptySet(response);
+    }
+
+    private ResponseEntity<Set<RemoteJobOfferDto>> executeGetRequest(String servicePath) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         final HttpEntity<HttpHeaders> requestEntity = new HttpEntity<>(headers);
-        final String url = UriComponentsBuilder.fromHttpUrl(createServiceURL("/offers"))
-                .toUriString();
-        ResponseEntity<Set<RemoteJobOfferDto>> response = restTemplate.exchange(
+        final String url = UriComponentsBuilder.fromHttpUrl(createServiceURL(servicePath)).toUriString();
+        return restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 requestEntity,
-                new ParameterizedTypeReference<>() {
-                });
-        return getBodyOrEmptySet(response);
+                new ParameterizedTypeReference<>() {});
     }
 
     private String createServiceURL(String servicePath) {
