@@ -5,5 +5,5 @@ import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.model.dto.Re
 import java.util.Set;
 
 public interface RemoteJobOffersRetriever {
-    Set<RemoteJobOfferDto> retrieveRemoteJobOffers();
+    Set<RemoteJobOfferDto> retrieveRemoteJobOfferDtos();
 }

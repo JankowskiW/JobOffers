@@ -23,6 +23,7 @@
         <mockito-core.version>5.2.0</mockito-core.version>
         <testcontainers.version>1.17.6</testcontainers.version>
         <wiremock-jre8.version>2.35.0</wiremock-jre8.version>
+        <awaitility.version>4.2.0</awaitility.version>
     </properties>
 
     <dependencies>
@@ -100,6 +101,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${awaitility.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

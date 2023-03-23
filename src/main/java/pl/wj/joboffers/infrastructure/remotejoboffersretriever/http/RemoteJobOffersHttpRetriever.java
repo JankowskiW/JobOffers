@@ -19,7 +19,7 @@ public class RemoteJobOffersHttpRetriever implements RemoteJobOffersRetriever {
     private static final String SERVICE_PATH = "/offers";
 
     @Override
-    public Set<RemoteJobOfferDto> retrieveRemoteJobOffers() {
+    public Set<RemoteJobOfferDto> retrieveRemoteJobOfferDtos() {
         ResponseEntity<Set<RemoteJobOfferDto>> response = executeGetRequest(SERVICE_PATH);
         return getBodyOrEmptySet(response);
     }
@@ -41,10 +41,10 @@ public class RemoteJobOffersHttpRetriever implements RemoteJobOffersRetriever {
     }
 
     private Set<RemoteJobOfferDto> getBodyOrEmptySet(ResponseEntity<Set<RemoteJobOfferDto>> response) {
-        Set<RemoteJobOfferDto> remoteJobOffers = new HashSet<>();
+        Set<RemoteJobOfferDto> remoteJobOfferDtos = new HashSet<>();
         if (response.getBody() != null) {
-            remoteJobOffers = new HashSet<>(response.getBody());
+            remoteJobOfferDtos = new HashSet<>(response.getBody());
         }
-        return remoteJobOffers;
+        return remoteJobOfferDtos;
     }
 }

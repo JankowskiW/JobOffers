@@ -11,9 +11,8 @@ public class RemoteJobOffersRetrievingScheduler {
     private final RemoteJobOfferRetrieverFacade remoteJobOfferRetrieverFacade;
 
     @Scheduled(cron = "0 0 */3 * * *")
-//    @Scheduled(cron = "*/5 * * * * *")
-    public void retrieveRemoteJobOffers() {
+    public void retrieveRemoteJobOfferDtos() {
         log.info("Retrieved remote job offers");
-        remoteJobOfferRetrieverFacade.retrieveRemoteJobOffers();
+        remoteJobOfferRetrieverFacade.retrieveRemoteJobOfferDtos();
     }
 }

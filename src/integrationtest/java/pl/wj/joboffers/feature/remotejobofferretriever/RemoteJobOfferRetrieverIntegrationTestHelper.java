@@ -16,7 +16,7 @@ import java.util.Set;
 public class RemoteJobOfferRetrieverIntegrationTestHelper {
     private final ObjectMapper objectMapper;
 
-    private final List<RemoteJobOfferDto> remoteJobOffers = new ArrayList<>() {
+    private final List<RemoteJobOfferDto> remoteJobOfferDtos = new ArrayList<>() {
         {
             add(new RemoteJobOfferDto("Junior Java Developer", "CompanyName s.a.",
                     "3 000 - 5 000 PLN", "https://example.pl/job-offer-1"));
@@ -31,14 +31,14 @@ public class RemoteJobOfferRetrieverIntegrationTestHelper {
 
     public String createBodyWithSomeJobOffers() {
         try {
-            return objectMapper.writeValueAsString(remoteJobOffers);
+            return objectMapper.writeValueAsString(remoteJobOfferDtos);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
         return "[]";
     }
 
-    public Set<RemoteJobOfferDto> getSetOfRemoteJobOfferDtos() {
-        return new HashSet<>(remoteJobOffers);
+    public Set<RemoteJobOfferDto> getRemoteJobOfferDtos() {
+        return new HashSet<>(remoteJobOfferDtos);
     }
 }
