@@ -1,4 +1,4 @@
-package pl.wj.joboffers.feature.remotejobofferretriever;
+package pl.wj.joboffers.feature.remotejoboffersretriever;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.client.WireMock;
@@ -18,13 +18,13 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.awaitility.Awaitility.await;
 
 public class RemoteJobOffersHttpRetrieverIntegrationTest extends BaseIntegrationTest {
-    private final RemoteJobOfferRetrieverIntegrationTestHelper helper;
+    private final RemoteJobOffersRetrieverIntegrationTestHelper helper;
     private final RemoteJobOffersRetriever remoteJobOffersRetriever;
 
     @Autowired
     public RemoteJobOffersHttpRetrieverIntegrationTest(ObjectMapper objectMapper, MockMvc mockMvc,
                                                        RemoteJobOffersRetriever remoteJobOffersRetriever,
-                                                       RemoteJobOfferRetrieverIntegrationTestHelper helper) {
+                                                       RemoteJobOffersRetrieverIntegrationTestHelper helper) {
         super(objectMapper, mockMvc);
         this.remoteJobOffersRetriever = remoteJobOffersRetriever;
         this.helper = helper;

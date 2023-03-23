@@ -1,4 +1,4 @@
-package pl.wj.joboffers.feature.remotejobofferretriever;
+package pl.wj.joboffers.feature.remotejoboffersretriever;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
-public class RemoteJobOfferRetrieverIntegrationTestHelper {
+public class RemoteJobOffersRetrieverIntegrationTestHelper {
     private final ObjectMapper objectMapper;
 
     private final List<RemoteJobOfferDto> remoteJobOfferDtos = new ArrayList<>() {
