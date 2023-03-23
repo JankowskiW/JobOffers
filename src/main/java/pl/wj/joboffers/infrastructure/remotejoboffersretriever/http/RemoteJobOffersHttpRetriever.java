@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RequiredArgsConstructor
+
 public class RemoteJobOffersHttpRetriever implements RemoteJobOffersRetriever {
     private final RestTemplate restTemplate;
     private final String uri;
