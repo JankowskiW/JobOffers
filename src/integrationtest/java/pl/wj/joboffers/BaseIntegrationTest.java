@@ -14,10 +14,11 @@ import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
+import pl.wj.joboffers.config.IntegrationConfig;
 
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 
-@SpringBootTest(classes = JobOffersApplication.class)
+@SpringBootTest(classes = {JobOffersApplication.class, IntegrationConfig.class})
 @ActiveProfiles("integration")
 @AutoConfigureMockMvc
 @Testcontainers
