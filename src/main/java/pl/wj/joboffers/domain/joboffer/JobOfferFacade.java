@@ -1,20 +1,30 @@
 package pl.wj.joboffers.domain.joboffer;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 import pl.wj.joboffers.domain.joboffer.model.JobOffer;
+import pl.wj.joboffers.domain.joboffer.model.JobOfferMapper;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferDto;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RequiredArgsConstructor
 @Component
+@Log4j2
 public class JobOfferFacade {
     private final JobOfferRepository jobOfferRepository;
 
-    public void saveJobOffersIntoDatabase(Set<JobOfferDto> jobOfferDtos) {
-        Set<JobOffer> jobOffers = new HashSet<>(); // TODO: map jobOfferDtos to jobOffers
+    public void saveJobOffers(Set<JobOfferDto> jobOfferDtos) {
+        Set<JobOffer> jobOffers = JobOfferMapper.toJobOffersSet(jobOfferDtos);
+        log.info("Ilość zmapowanych obiektów w JobOfferFacade: " + jobOfferDtos.size());
         jobOfferRepository.saveAll(jobOffers);
+    }
+
+    public List<JobOffer> getAllJobOffers() {
+        List<JobOffer> jobOffers = jobOfferRepository.findAll();
+        log.info("Ilość pobranych obiektów z mongoDB: " + jobOffers.size());
+        return jobOffers;
     }
 }

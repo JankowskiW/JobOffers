@@ -23,8 +23,7 @@ public class RemoteJobOffersHttpRetrieverIntegrationTest extends BaseIntegration
         // given
         Set<RemoteJobOfferDto> expectedResponse = helper.getRemoteJobOfferDtos();
         wireMockServer.stubFor(WireMock.get("/offers")
-                .willReturn(
-                        WireMock.aResponse()
+                .willReturn(WireMock.aResponse()
                                 .withStatus(HttpStatus.OK.value())
                                 .withHeader("Content-Type", "application/json")
                                 .withBody(helper.createBodyWithSomeJobOffers())));
