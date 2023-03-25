@@ -24,6 +24,7 @@
         <testcontainers.version>1.17.6</testcontainers.version>
         <wiremock-jre8.version>2.35.0</wiremock-jre8.version>
         <awaitility.version>4.2.0</awaitility.version>
+        <lombok-version>1.18.26</lombok-version>
     </properties>
 
     <dependencies>
@@ -53,6 +54,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+            <version>${lombok-version}</version>
         </dependency>
 
         <dependency>
