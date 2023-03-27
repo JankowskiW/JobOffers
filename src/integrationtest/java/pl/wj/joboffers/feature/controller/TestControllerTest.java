@@ -11,7 +11,6 @@ import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferResponseDto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class TestControllerTest extends BaseIntegrationTest {
@@ -33,10 +32,10 @@ public class TestControllerTest extends BaseIntegrationTest {
     @Test
     void someTest2() throws Exception {
         String path = "/job-offers";
-
+        String id = "identifier";
 
         JobOfferResponseDto response = JobOfferResponseDto.builder()
-                .id("identifier")
+                .id(id)
                 .title("some title")
                 .company("some company")
                 .salary("some salary")
@@ -46,7 +45,7 @@ public class TestControllerTest extends BaseIntegrationTest {
         System.out.println((new ObjectMapper())
                 .writeValueAsString(response));
 
-        ResultActions result = mockMvc.perform(get(path)
+        ResultActions result = mockMvc.perform(get(path + "/" + id)
                 .contentType(MediaType.APPLICATION_JSON));
 
         MvcResult mvcResult = result.andExpect(status().isOk()).andReturn();
