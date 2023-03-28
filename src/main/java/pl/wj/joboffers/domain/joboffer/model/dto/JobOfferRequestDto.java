@@ -1,12 +1,14 @@
 package pl.wj.joboffers.domain.joboffer.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record JobOfferRequestDto(
-        @NotNull(message = "{validation.request.job-offer.title.not-null")
+        @NotBlank(message = "{validation.request.job-offer.title.not-blank}")
         String title,
-        @NotNull(message = "{validation.request.job-offer.company.not-null")
+        @NotBlank(message = "{validation.request.job-offer.company.not-blank}")
         String company,
+        @NotNull(message = "{validation.request.job-offer.salary.not-null}")
         String salary,
-        @NotNull(message = "{validation.request.job-offer.offer-url.not-null")
+        @NotBlank(message = "{validation.request.job-offer.offer-url.not-blank}")
         String offerUrl) {}
