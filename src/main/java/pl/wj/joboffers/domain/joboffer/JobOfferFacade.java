@@ -7,7 +7,7 @@ import pl.wj.joboffers.domain.joboffer.model.JobOffer;
 import pl.wj.joboffers.domain.joboffer.model.JobOfferMapper;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferDto;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferResponseDto;
-import pl.wj.joboffers.exception.ResourceNotFoundException;
+import pl.wj.joboffers.exception.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Set;

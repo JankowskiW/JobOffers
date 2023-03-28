@@ -1,4 +1,4 @@
-package pl.wj.joboffers.exception;
+package pl.wj.joboffers.exception.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.RemoteJobOffersHttpRetriever;
 import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.RemoteJobOffersRetriever;
-import pl.wj.joboffers.exception.RestTemplateResponseErrorHandler;
+import pl.wj.joboffers.exception.handler.RestTemplateResponseErrorHandler;
 
 import java.time.Duration;
 
