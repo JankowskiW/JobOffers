@@ -6,5 +6,5 @@ import pl.wj.joboffers.domain.joboffer.model.JobOffer;
 
 @Repository
 public interface JobOfferRepository extends MongoRepository<JobOffer, String> {
-
+    boolean existsByOfferUrl(String offerUrl);
 }
