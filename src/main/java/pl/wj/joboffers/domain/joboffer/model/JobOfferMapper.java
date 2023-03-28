@@ -3,6 +3,7 @@ package pl.wj.joboffers.domain.joboffer.model;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferDto;
+import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferResponseDto;
 import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.model.dto.RemoteJobOfferDto;
 
 import java.util.Set;
@@ -38,5 +39,15 @@ public class JobOfferMapper {
 
     public static Set<JobOfferDto> toJobOfferDtosSet(Set<RemoteJobOfferDto> remoteJobOfferDtos) {
         return remoteJobOfferDtos.stream().map(JobOfferMapper::toJobOfferDto).collect(Collectors.toSet());
+    }
+
+    public static JobOfferResponseDto toJobOfferResponseDto(JobOffer jobOffer) {
+        return JobOfferResponseDto.builder()
+                .id(jobOffer.id())
+                .title(jobOffer.title())
+                .company(jobOffer.company())
+                .salary(jobOffer.salary())
+                .offerUrl(jobOffer.offerUrl())
+                .build();
     }
 }

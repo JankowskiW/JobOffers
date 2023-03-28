@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import pl.wj.joboffers.domain.joboffer.model.JobOffer;
 import pl.wj.joboffers.domain.joboffer.model.JobOfferMapper;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferDto;
+import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferResponseDto;
+import pl.wj.joboffers.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Set;
@@ -26,5 +28,11 @@ public class JobOfferFacade {
         List<JobOffer> jobOffers = jobOfferRepository.findAll();
         log.info("Ilość pobranych obiektów z mongoDB: " + jobOffers.size());
         return jobOffers;
+    }
+
+    public JobOfferResponseDto getJobOfferById(String id) {
+        JobOffer jobOffer = jobOfferRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Not found job offer with id:" + id));
+        return JobOfferMapper.toJobOfferResponseDto(jobOffer);
     }
 }

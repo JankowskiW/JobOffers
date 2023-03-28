@@ -18,14 +18,7 @@ public class JobOfferController {
 
     @GetMapping("/{id}")
     public ResponseEntity<JobOfferResponseDto> getJobOfferById(@PathVariable String id) {
-        JobOfferResponseDto response = JobOfferResponseDto.builder()
-                .id("identifier")
-                .title("some title")
-                .company("some company")
-                .salary("some salary")
-                .offerUrl("some offer url")
-                .build();
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(jobOfferFacade.getJobOfferById(id));
 //        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
