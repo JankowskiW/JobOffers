@@ -7,6 +7,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import pl.wj.joboffers.BaseIntegrationTest;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferResponseDto;
+import pl.wj.joboffers.exception.body.RequestValidationExceptionBody;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -14,6 +15,29 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class TestControllerTest extends BaseIntegrationTest {
+
+    @Test
+    void someValidationTest() throws Exception {
+        // given
+        String path = "/job-offers";
+
+        // when
+        ResultActions perform = mockMvc.perform(post(path).content("""
+                {
+                }
+                """).contentType(MediaType.APPLICATION_JSON));
+
+        // then
+        MvcResult mvcResult = perform.andExpect(status().isBadRequest()).andReturn();
+        String json = mvcResult.getResponse().getContentAsString();
+        RequestValidationExceptionBody response = objectMapper.readValue(json, RequestValidationExceptionBody.class);
+        assertThat(response.messages()).containsExactlyInAnyOrder(
+                "title must not be blank",
+                "company must not be blank",
+                "offer url must not be blank",
+                "salary must not be null"
+        );
+    }
 
     @Test
     void someTest() throws Exception {
