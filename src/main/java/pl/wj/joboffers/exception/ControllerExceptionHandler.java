@@ -13,8 +13,10 @@ import java.time.ZonedDateTime;
 public class ControllerExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public ExceptionBody handleSomething(ResourceNotFoundException e) {
-        return new ExceptionBody(e.getMessage(), HttpStatus.NOT_FOUND, ZonedDateTime.now());
+    public ExceptionBody handleResourceNotFoundException(ResourceNotFoundException e) {
+        ExceptionBody response = new ExceptionBody(e.getMessage(), HttpStatus.NOT_FOUND, ZonedDateTime.now());
+        log.error(String.format("[%s]: %s", response.httpStatus(), response.message()));
+        return response;
     }
 
 }
