@@ -2,6 +2,7 @@ package pl.wj.joboffers.infrastructure.joboffer;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.wj.joboffers.domain.joboffer.JobOfferFacade;
@@ -23,6 +24,6 @@ public class JobOfferController {
 
     @PostMapping
     public ResponseEntity<JobOfferResponseDto> addJobOffer(@RequestBody @Valid JobOfferRequestDto jobOfferRequestDto) {
-        return ResponseEntity.ok(jobOfferFacade.addJobOffer(jobOfferRequestDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(jobOfferFacade.addJobOffer(jobOfferRequestDto));
     }
 }

@@ -8,7 +8,6 @@ import pl.wj.joboffers.domain.joboffer.model.JobOfferMapper;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferDto;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferRequestDto;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferResponseDto;
-import pl.wj.joboffers.exception.exception.ResourceAlreadyExistsException;
 import pl.wj.joboffers.exception.exception.ResourceNotFoundException;
 
 import java.util.List;
@@ -39,9 +38,9 @@ public class JobOfferFacade {
     }
 
     public JobOfferResponseDto addJobOffer(JobOfferRequestDto jobOfferRequestDto) {
-        if (jobOfferRepository.existsByOfferUrl(jobOfferRequestDto.offerUrl()))
-            throw new ResourceAlreadyExistsException(
-                    String.format("Job offer with url %s already exists", jobOfferRequestDto.offerUrl()));
+//        if (jobOfferRepository.existsByOfferUrl(jobOfferRequestDto.offerUrl()))
+//            throw new ResourceAlreadyExistsException(
+//                    String.format("Job offer with url %s already exists", jobOfferRequestDto.offerUrl()));
         JobOffer jobOffer = JobOfferMapper.toJobOffer(jobOfferRequestDto);
         return JobOfferMapper.toJobOfferResponseDto(jobOfferRepository.save(jobOffer));
     }
