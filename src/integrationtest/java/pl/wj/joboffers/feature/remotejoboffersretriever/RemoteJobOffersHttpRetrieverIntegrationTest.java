@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import pl.wj.joboffers.BaseIntegrationTest;
 import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.RemoteJobOffersRetriever;
-import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.model.dto.RemoteJobOfferDto;
+import pl.wj.joboffers.domain.remotejoboffersretriever.dto.RemoteJobOfferDto;
 
 import java.util.Set;
 

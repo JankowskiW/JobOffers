@@ -1,6 +1,6 @@
 package pl.wj.joboffers.infrastructure.remotejoboffersretriever.http;
 
-import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.model.dto.RemoteJobOfferDto;
+import pl.wj.joboffers.domain.remotejoboffersretriever.dto.RemoteJobOfferDto;
 
 import java.util.Set;
 

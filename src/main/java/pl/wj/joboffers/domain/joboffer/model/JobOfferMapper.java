@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferDto;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferRequestDto;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferResponseDto;
-import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.model.dto.RemoteJobOfferDto;
+import pl.wj.joboffers.domain.remotejoboffersretriever.dto.RemoteJobOfferDto;
 
 import java.util.Set;
 import java.util.stream.Collectors;

@@ -5,7 +5,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.model.dto.RemoteJobOfferDto;
+import pl.wj.joboffers.domain.remotejoboffersretriever.dto.RemoteJobOfferDto;
 
 import java.util.HashSet;
 import java.util.Set;

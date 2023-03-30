@@ -5,7 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import pl.wj.joboffers.domain.remotejoboffersretriever.RemoteJobOffersRetrieverFacade;
-import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.model.dto.RemoteJobOfferDto;
+import pl.wj.joboffers.domain.remotejoboffersretriever.dto.RemoteJobOfferDto;
 
 import java.util.Set;
 

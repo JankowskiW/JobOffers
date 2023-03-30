@@ -11,7 +11,7 @@ import pl.wj.joboffers.JobOffersApplication;
 import pl.wj.joboffers.domain.joboffer.JobOfferFacade;
 import pl.wj.joboffers.feature.remotejoboffersretriever.RemoteJobOffersRetrieverIntegrationTestHelper;
 import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.RemoteJobOffersRetriever;
-import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.model.dto.RemoteJobOfferDto;
+import pl.wj.joboffers.domain.remotejoboffersretriever.dto.RemoteJobOfferDto;
 
 import java.time.Duration;
 import java.util.Set;
