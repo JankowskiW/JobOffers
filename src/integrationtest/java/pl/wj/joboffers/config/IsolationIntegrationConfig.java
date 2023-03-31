@@ -15,6 +15,6 @@ public class IsolationIntegrationConfig extends RemoteJobOffersRetrieverConfig {
     }
 
     public RemoteJobOffersRetriever remoteJobOfferRetriever() {
-        return remoteJobOfferRetriever(httpClient(restTemplate(restTemplateResponseErrorHandler())));
+        return remoteJobOfferRetriever(restTemplate(restTemplateResponseErrorHandler()));
     }
 }

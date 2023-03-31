@@ -1,8 +1,10 @@
 package pl.wj.joboffers.infrastructure.remotejoboffersretriever.http;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import pl.wj.joboffers.domain.remotejoboffersretriever.dto.RemoteJobOfferDto;
@@ -11,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RequiredArgsConstructor
-
+@Log4j2
 public class RemoteJobOffersHttpRetriever implements RemoteJobOffersRetriever {
     private final RestTemplate restTemplate;
     private final String uri;
@@ -21,15 +23,20 @@ public class RemoteJobOffersHttpRetriever implements RemoteJobOffersRetriever {
 
     @Override
     public Set<RemoteJobOfferDto> retrieveRemoteJobOfferDtos() {
-        ResponseEntity<Set<RemoteJobOfferDto>> response = executeGetRequest(SERVICE_PATH);
-        return getBodyOrEmptySet(response);
+        try {
+            ResponseEntity<Set<RemoteJobOfferDto>> response = executeGetRequest();
+            return getBodyOrEmptySet(response);
+        } catch (ResourceAccessException e) {
+            log.error("Error during receiving job offers from remote service");
+            return new HashSet<>();
+        }
     }
 
-    private ResponseEntity<Set<RemoteJobOfferDto>> executeGetRequest(String servicePath) {
+    private ResponseEntity<Set<RemoteJobOfferDto>> executeGetRequest() throws ResourceAccessException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         final HttpEntity<HttpHeaders> requestEntity = new HttpEntity<>(headers);
-        final String url = UriComponentsBuilder.fromHttpUrl(createServiceURL(servicePath)).toUriString();
+        final String url = UriComponentsBuilder.fromHttpUrl(createServiceURL()).toUriString();
         return restTemplate.exchange(
                 url,
                 HttpMethod.GET,
@@ -37,8 +44,8 @@ public class RemoteJobOffersHttpRetriever implements RemoteJobOffersRetriever {
                 new ParameterizedTypeReference<>() {});
     }
 
-    private String createServiceURL(String servicePath) {
-        return String.format("%s:%s%s", uri, port, servicePath);
+    private String createServiceURL() {
+        return String.format("%s:%s%s", uri, port, SERVICE_PATH);
     }
 
     private Set<RemoteJobOfferDto> getBodyOrEmptySet(ResponseEntity<Set<RemoteJobOfferDto>> response) {
