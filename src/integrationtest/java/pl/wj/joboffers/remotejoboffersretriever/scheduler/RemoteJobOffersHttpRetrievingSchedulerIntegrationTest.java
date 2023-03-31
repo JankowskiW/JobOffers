@@ -1,4 +1,4 @@
-package pl.wj.joboffers.feature.remotejoboffersretrievingscheduler;
+package pl.wj.joboffers.remotejoboffersretriever.scheduler;
 
 import com.github.tomakehurst.wiremock.client.WireMock;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import pl.wj.joboffers.BaseIntegrationTest;
 import pl.wj.joboffers.JobOffersApplication;
 import pl.wj.joboffers.domain.joboffer.JobOfferFacade;
-import pl.wj.joboffers.feature.remotejoboffersretriever.RemoteJobOffersRetrieverIntegrationTestHelper;
+import pl.wj.joboffers.remotejoboffersretriever.http.RemoteJobOffersRetrieverIntegrationTestHelper;
 import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.RemoteJobOffersRetriever;
 import pl.wj.joboffers.domain.remotejoboffersretriever.dto.RemoteJobOfferDto;
 
@@ -50,8 +50,9 @@ public class RemoteJobOffersHttpRetrievingSchedulerIntegrationTest extends BaseI
     @Test
     void shouldSaveJobOffersToDatabase() {
         // given
+        String url = "/offers";
         Set<RemoteJobOfferDto> remoteJobOfferDtos = helper.getRemoteJobOfferDtos();
-        wireMockServer.stubFor(WireMock.get("/offers")
+        wireMockServer.stubFor(WireMock.get(url)
                 .willReturn(WireMock.aResponse()
                         .withStatus(HttpStatus.OK.value())
                         .withHeader("Content-Type", "application/json")

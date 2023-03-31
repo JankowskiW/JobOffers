@@ -1,4 +1,4 @@
-package pl.wj.joboffers.feature.controller;
+package pl.wj.joboffers.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

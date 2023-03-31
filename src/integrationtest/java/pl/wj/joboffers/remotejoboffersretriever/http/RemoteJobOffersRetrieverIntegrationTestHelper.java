@@ -1,4 +1,4 @@
-package pl.wj.joboffers.feature.remotejoboffersretriever;
+package pl.wj.joboffers.remotejoboffersretriever.http;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

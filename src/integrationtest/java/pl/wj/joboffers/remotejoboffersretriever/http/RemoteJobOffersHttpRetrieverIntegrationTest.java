@@ -1,4 +1,4 @@
-package pl.wj.joboffers.feature.remotejoboffersretriever;
+package pl.wj.joboffers.remotejoboffersretriever.http;
 
 import com.github.tomakehurst.wiremock.client.WireMock;
 import org.junit.jupiter.api.Test;
@@ -21,8 +21,9 @@ public class RemoteJobOffersHttpRetrieverIntegrationTest extends BaseIntegration
     @Test
     void shouldRetrieveAllRemoteJobOffers() {
         // given
+        String url = "/offers";
         Set<RemoteJobOfferDto> expectedResponse = helper.getRemoteJobOfferDtos();
-        wireMockServer.stubFor(WireMock.get("/offers")
+        wireMockServer.stubFor(WireMock.get(url)
                 .willReturn(WireMock.aResponse()
                                 .withStatus(HttpStatus.OK.value())
                                 .withHeader("Content-Type", "application/json")
