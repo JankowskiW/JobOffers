@@ -32,11 +32,14 @@ public class RemoteJobOffersHttpRetrieverIsolationIntegrationTest {
             .build();
 
     RemoteJobOffersRetriever remoteJobOffersRetriever =
-            new IsolationIntegrationConfig(wireMockServer.getPort(), 1000, 1000).remoteJobOfferRetriever();
+            new IsolationIntegrationConfig(wireMockServer.getPort(), CONNECTION_TIMEOUT, READ_TIMEOUT).remoteJobOfferRetriever();
 
     private static final String URL = "/offers";
     private static final Map.Entry<String, String> CONTENT_TYPE_HEADER =
             new AbstractMap.SimpleEntry<>("Content-Type", "application/json");
+    private static final int CONNECTION_TIMEOUT = 1500;
+    private static final int READ_TIMEOUT = 1000;
+
 
     @Test
     void shouldReturnStatus200AndAvailableRemoteOffers() {
@@ -59,8 +62,9 @@ public class RemoteJobOffersHttpRetrieverIsolationIntegrationTest {
     }
 
     @Test
-    void shouldNotReturnAnyOffersWhenConnectionResetByPeer() {
+    void shouldReturnEmptySetWhenConnectionResetByPeer() {
         // given
+        Set<RemoteJobOfferDto> expectedResponse = new HashSet<>();
         wireMockServer.stubFor(WireMock.get(URL)
                 .willReturn(WireMock.aResponse()
                         .withStatus(HttpStatus.OK.value())
@@ -73,7 +77,27 @@ public class RemoteJobOffersHttpRetrieverIsolationIntegrationTest {
 
         // then
         assertThat(response)
-                .isEqualTo(new HashSet<>());
+                .isEqualTo(expectedResponse);
+    }
+
+    @Test
+    void shouldReturnEmptySetWhenReadTimeoutHasBeenReached() {
+        // given
+        Set<RemoteJobOfferDto> expectedResponse = new HashSet<>();
+        wireMockServer.stubFor(WireMock.get(URL)
+                .willReturn(WireMock.aResponse()
+                        .withStatus(HttpStatus.OK.value())
+                        .withHeader(CONTENT_TYPE_HEADER.getKey(), CONTENT_TYPE_HEADER.getValue())
+                        .withBody(helper.createBodyWithSomeJobOffers())
+                        .withFixedDelay(READ_TIMEOUT * 2)
+                ));
+
+        // when
+        Set<RemoteJobOfferDto> response = remoteJobOffersRetriever.retrieveRemoteJobOfferDtos();
+
+        // then
+        assertThat(response)
+                .isEqualTo(expectedResponse);
     }
 
 }

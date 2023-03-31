@@ -22,13 +22,13 @@ public class JobOfferFacade {
 
     public void saveJobOffers(Set<JobOfferDto> jobOfferDtos) {
         Set<JobOffer> jobOffers = JobOfferMapper.toJobOffersSet(jobOfferDtos);
-        log.info("Ilość zmapowanych obiektów w JobOfferFacade: " + jobOfferDtos.size());
         jobOfferRepository.saveAll(jobOffers);
+        log.info("Number of inserted job offers into database: " + jobOffers.size());
     }
 
     public List<JobOffer> getAllJobOffers() {
         List<JobOffer> jobOffers = jobOfferRepository.findAll();
-        log.info("Ilość pobranych obiektów z mongoDB: " + jobOffers.size());
+        log.info("Number of selected job offers from database: " + jobOffers.size());
         return jobOffers;
     }
 

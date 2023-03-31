@@ -3,6 +3,7 @@ package pl.wj.joboffers.domain.remotejoboffersretriever;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 import pl.wj.joboffers.domain.joboffer.JobOfferFacade;
 import pl.wj.joboffers.domain.joboffer.model.JobOfferMapper;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferDto;
@@ -10,6 +11,7 @@ import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferUrlDto;
 import pl.wj.joboffers.domain.remotejoboffersretriever.dto.RemoteJobOfferDto;
 import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.RemoteJobOffersRetriever;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -23,7 +25,12 @@ public class RemoteJobOffersRetrieverFacade {
 
 
     public Set<RemoteJobOfferDto> retrieveRemoteJobOfferDtos() {
-        return remoteJobOffersRetriever.retrieveRemoteJobOfferDtos();
+        try {
+            return remoteJobOffersRetriever.retrieveRemoteJobOfferDtos();
+        } catch (ResponseStatusException e) {
+            log.error("Cannot retrieve job offers from remote service: " + e.getMessage());
+            return new HashSet<>();
+        }
     }
 
     public void saveRetrievedJobOffersIntoDatabase(Set<RemoteJobOfferDto> remoteJobOfferDtos) {

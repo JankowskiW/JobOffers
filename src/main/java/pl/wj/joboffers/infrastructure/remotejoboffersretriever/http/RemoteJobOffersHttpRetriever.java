@@ -27,7 +27,7 @@ public class RemoteJobOffersHttpRetriever implements RemoteJobOffersRetriever {
             ResponseEntity<Set<RemoteJobOfferDto>> response = executeGetRequest();
             return getBodyOrEmptySet(response);
         } catch (ResourceAccessException e) {
-            log.error("Error during receiving job offers from remote service");
+            log.error("Error occured during receiving job offers from remote service: " + e.getMessage());
             return new HashSet<>();
         }
     }
