@@ -19,7 +19,6 @@ public class JobOfferController {
     @GetMapping("/{id}")
     public ResponseEntity<JobOfferResponseDto> getJobOfferById(@PathVariable String id) {
         return ResponseEntity.ok(jobOfferFacade.getJobOfferById(id));
-//        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping
