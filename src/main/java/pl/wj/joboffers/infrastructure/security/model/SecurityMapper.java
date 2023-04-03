@@ -1,4 +1,4 @@
-package pl.wj.joboffers.domain.registerandloginmanager.model;
+package pl.wj.joboffers.infrastructure.security.model;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

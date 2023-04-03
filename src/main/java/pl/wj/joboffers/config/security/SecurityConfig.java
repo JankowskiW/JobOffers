@@ -1,4 +1,4 @@
-package pl.wj.joboffers.config.registerandloginmanager.security;
+package pl.wj.joboffers.config.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
-import pl.wj.joboffers.domain.registerandloginmanager.RegisterAndLoginManagerFacade;
+import pl.wj.joboffers.domain.user.UserFacade;
+import pl.wj.joboffers.infrastructure.security.LoginUserDetailsService;
 
 @Configuration
 @RequiredArgsConstructor
@@ -21,25 +22,25 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(RegisterAndLoginManagerFacade registerAndLoginManagerFacade) {
-        return new LoginUserDetailsService(registerAndLoginManagerFacade);
+    public UserDetailsService userDetailsService(UserFacade userFacade) {
+        return new LoginUserDetailsService(userFacade);
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable();
-        httpSecurity.authorizeHttpRequests()
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+        http.authorizeHttpRequests((authz) -> authz
                 .requestMatchers("/swagger-ui/**").permitAll()
-                .requestMatchers("/user/login/**").permitAll()
-                .requestMatchers("/user/register/**").permitAll()
+                .requestMatchers("/v3/api-docs/**").permitAll()
+                .requestMatchers("/webjars/**").permitAll()
+                .requestMatchers("/login/**").permitAll()
+                .requestMatchers("/register/**").permitAll()
                 .requestMatchers("/swagger-resources/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
+                .anyRequest().authenticated())
                 .headers().frameOptions().disable()
                 .and().httpBasic().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .exceptionHandling();
-        return httpSecurity.build();
+                        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                        .and().exceptionHandling();
+        return http.build();
     }
 }
