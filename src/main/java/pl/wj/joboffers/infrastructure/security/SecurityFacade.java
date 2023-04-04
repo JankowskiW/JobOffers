@@ -13,9 +13,7 @@ import pl.wj.joboffers.domain.user.model.dto.UserLoginRequestDto;
 import pl.wj.joboffers.infrastructure.security.model.SecurityProperties;
 import pl.wj.joboffers.infrastructure.security.model.dto.JwtResponseDto;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.*;
 
 @Component
 @RequiredArgsConstructor
@@ -23,6 +21,8 @@ import java.time.ZoneOffset;
 public class SecurityFacade {
     private final AuthenticationManager authenticationManager;
     private final SecurityProperties securityProperties;
+    private final Clock clock;
+
 
     public JwtResponseDto login(UserLoginRequestDto userLoginRequestDto) {
         User user = getAuthenticatedUser(userLoginRequestDto.username(), userLoginRequestDto.password());
@@ -40,11 +40,11 @@ public class SecurityFacade {
 
     private String createToken(User user) {
         // TODO: Create Clock bean and inject that bean to this class, also use that clock in LocalDateTime.now(clock) method
-        Instant now = LocalDateTime.now().toInstant(ZoneOffset.UTC);
+        Instant now = LocalDateTime.now(clock).toInstant(ZoneOffset.UTC);
         return JWT.create()
                 .withSubject(user.getUsername())
                 .withIssuedAt(now)
-                .withExpiresAt(now.plusMillis(securityProperties.expirationMs()))
+                .withExpiresAt(now.plus(Duration.ofDays(securityProperties.expirationDays())))
                 .withIssuer(securityProperties.issuer())
                 .sign(Algorithm.HMAC256(securityProperties.secretKey()));
     }

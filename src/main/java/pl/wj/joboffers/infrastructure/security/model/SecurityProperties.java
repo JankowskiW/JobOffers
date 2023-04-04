@@ -5,5 +5,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "job-offers.security")
 @Builder
-public record SecurityProperties(String secretKey, long expirationMs, String issuer) {
+public record SecurityProperties(String secretKey, long expirationDays, String issuer) {
 }
