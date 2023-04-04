@@ -35,6 +35,8 @@ public class SecurityConfig {
                 .requestMatchers("/webjars/**").permitAll()
                 .requestMatchers("/login/**").permitAll()
                 .requestMatchers("/register/**").permitAll()
+                        .requestMatchers("/user/login/**").permitAll()
+                        .requestMatchers("/user/register/**").permitAll()
                 .requestMatchers("/swagger-resources/**").permitAll()
                 .anyRequest().authenticated())
                 .headers().frameOptions().disable()

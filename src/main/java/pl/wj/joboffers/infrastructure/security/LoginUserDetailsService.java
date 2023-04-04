@@ -15,7 +15,7 @@ public class LoginUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws BadCredentialsException {
         try {
-            return SecurityMapper.toSecurityUser(userFacade.getUserByUsername(username));
+            return SecurityMapper.toSecurityUser(userFacade.getUserSecurityByUsername(username));
         } catch (ResourceNotFoundException e) {
             throw new BadCredentialsException(e.getMessage());
         }

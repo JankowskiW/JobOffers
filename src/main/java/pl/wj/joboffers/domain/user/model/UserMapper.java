@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import pl.wj.joboffers.domain.user.model.dto.UserRegisterRequestDto;
 import pl.wj.joboffers.domain.user.model.dto.UserResponseDto;
+import pl.wj.joboffers.domain.user.model.dto.UserSecurityDto;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserMapper {
@@ -12,14 +13,20 @@ public class UserMapper {
         return UserResponseDto.builder()
                 .id(user.id())
                 .username(user.username())
-                .password(user.password())
                 .build();
     }
 
-    public static User toUser(UserRegisterRequestDto userRegisterRequestDto) {
+    public static User toUser(UserRegisterRequestDto userRegisterRequestDto, String encodedPassword) {
         return User.builder()
                 .username(userRegisterRequestDto.username())
-                .password(userRegisterRequestDto.password())
+                .password(encodedPassword)
+                .build();
+    }
+
+    public static UserSecurityDto toUserSecurityDto(User user) {
+        return UserSecurityDto.builder()
+                .username(user.username())
+                .password(user.password())
                 .build();
     }
 }

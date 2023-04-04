@@ -25,9 +25,7 @@ public record User(
         }
 
         @Override
-        public String getPassword() {
-                return password;
-        }
+        public String getPassword() { return password; }
 
         @Override
         public String getUsername() {
