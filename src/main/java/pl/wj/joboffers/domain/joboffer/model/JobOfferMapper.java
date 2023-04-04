@@ -7,6 +7,7 @@ import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferRequestDto;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferResponseDto;
 import pl.wj.joboffers.domain.remotejoboffersretriever.dto.RemoteJobOfferDto;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,11 @@ public class JobOfferMapper {
                 .build();
     }
 
+
+    public static Set<JobOffer> toJobOffersSet(Set<JobOfferDto> jobOfferDtos) {
+        return jobOfferDtos.stream().map(JobOfferMapper::toJobOffer).collect(Collectors.toSet());
+    }
+
     public static JobOffer toJobOffer(JobOfferDto jobOfferDto) {
         return JobOffer
                 .builder()
@@ -34,8 +40,9 @@ public class JobOfferMapper {
                 .build();
     }
 
-    public static Set<JobOffer> toJobOffersSet(Set<JobOfferDto> jobOfferDtos) {
-        return jobOfferDtos.stream().map(JobOfferMapper::toJobOffer).collect(Collectors.toSet());
+
+    public static Set<JobOfferDto> toJobOfferDtosSet(Set<RemoteJobOfferDto> remoteJobOfferDtos) {
+        return remoteJobOfferDtos.stream().map(JobOfferMapper::toJobOfferDto).collect(Collectors.toSet());
     }
 
     public static JobOfferDto toJobOfferDto(RemoteJobOfferDto remoteJobOfferDto) {
@@ -48,8 +55,9 @@ public class JobOfferMapper {
                 .build();
     }
 
-    public static Set<JobOfferDto> toJobOfferDtosSet(Set<RemoteJobOfferDto> remoteJobOfferDtos) {
-        return remoteJobOfferDtos.stream().map(JobOfferMapper::toJobOfferDto).collect(Collectors.toSet());
+
+    public static List<JobOfferResponseDto> toJobOfferResponseDtoList(List<JobOffer> jobOffers) {
+        return jobOffers.stream().map(JobOfferMapper::toJobOfferResponseDto).collect(Collectors.toList());
     }
 
     public static JobOfferResponseDto toJobOfferResponseDto(JobOffer jobOffer) {

@@ -9,6 +9,8 @@ import pl.wj.joboffers.domain.joboffer.JobOfferFacade;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferRequestDto;
 import pl.wj.joboffers.domain.joboffer.model.dto.JobOfferResponseDto;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/job-offers")
@@ -19,6 +21,11 @@ public class JobOfferController {
     @GetMapping("/{id}")
     public ResponseEntity<JobOfferResponseDto> getJobOfferById(@PathVariable String id) {
         return ResponseEntity.ok(jobOfferFacade.getJobOfferById(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<JobOfferResponseDto>> getAllJobOffers() {
+        return ResponseEntity.ok(jobOfferFacade.getAllJobOffers());
     }
 
     @PostMapping

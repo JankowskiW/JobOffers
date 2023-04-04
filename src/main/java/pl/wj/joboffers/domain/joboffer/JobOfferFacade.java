@@ -26,10 +26,9 @@ public class JobOfferFacade {
         log.info("Number of inserted job offers into database: " + jobOffers.size());
     }
 
-    public List<JobOffer> getAllJobOffers() {
+    public List<JobOfferResponseDto> getAllJobOffers() {
         List<JobOffer> jobOffers = jobOfferRepository.findAll();
-        log.info("Number of selected job offers from database: " + jobOffers.size());
-        return jobOffers;
+        return JobOfferMapper.toJobOfferResponseDtoList(jobOffers);
     }
 
     public JobOfferResponseDto getJobOfferById(String id) {
