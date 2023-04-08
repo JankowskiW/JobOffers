@@ -16,6 +16,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class TestControllerTest extends BaseIntegrationTest {
 
+    /* TODO: Use Spring Security Test (09.18) to avoid problems with spring security during integration testing
+     *       (@WithMockUser() annotation)
+    */
+
     @Test
     void someValidationTest() throws Exception {
         // given
