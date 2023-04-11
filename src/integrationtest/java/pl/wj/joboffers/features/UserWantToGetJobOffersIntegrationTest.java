@@ -1,15 +1,41 @@
 package pl.wj.joboffers.features;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.ResultActions;
 import pl.wj.joboffers.BaseIntegrationTest;
 
-public class UserWantToGetJobOffersIntegrationTest  extends BaseIntegrationTest {
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+public class UserWantToGetJobOffersIntegrationTest  extends BaseIntegrationTest {
+    private static final String contentType = MediaType.APPLICATION_JSON_VALUE;
     @Test
-    void shouldGetJobOffersWhenUserIsAuthenticatedAndExternalServiceHasSomeOffers() {
+    void shouldGetJobOffersWhenUserIsAuthenticatedAndExternalServiceHasSomeOffers() throws Exception {
         // step 1: Unauthenticated user tried to get job offers and system should return FORBIDDEN(403)
+        // given
+        String jobOffersPath = "/job-offers";
+        // when
+        ResultActions failedGetOfferRequest = mockMvc.perform(get(jobOffersPath).contentType(contentType));
+        // then
+        failedGetOfferRequest.andExpect(status().isForbidden());
 
         // step 2: User tried to log in with wrong credentials and system should return NOT_FOUND(404)
+        // given
+        String loginBody = """
+                {
+                    "username":"notExistedUser",
+                    "password":"somePassword"
+                }
+                """;
+        String loginPath = "/user/login";
+        // when
+        ResultActions failedLoginRequest = mockMvc.perform(post(loginPath)
+                        .content(loginBody)
+                .contentType(contentType));
+        // then
+        failedLoginRequest.andExpect(status().isNotFound());
 
         // step 3: User tried to create account with username that already exists and system should return CONFLICT(409)
 
