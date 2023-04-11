@@ -14,7 +14,7 @@ public class IntegrationConfig {
     @Bean
     @Primary
     Clock clock() { // TODO: Change Clock to AdjustableClock
-        return null;
+        return Clock.systemUTC();
     }
 
 }
