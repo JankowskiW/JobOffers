@@ -33,11 +33,10 @@ public class RemoteJobOffersRetrieverFacade {
         }
     }
 
-    public void saveRetrievedJobOffersIntoDatabase(Set<RemoteJobOfferDto> remoteJobOfferDtos) {
-        Set<JobOfferDto> jobOfferDtos = filterRemoteJobOfferDtos(JobOfferMapper.toJobOfferDtosSet(remoteJobOfferDtos));
+    public List<JobOfferDto> saveRetrievedJobOffersIntoDatabase(Set<RemoteJobOfferDto> remoteJobOfferDtos) {
+        Set<JobOfferDto> jobOfferDtos = filterRemoteJobOfferDtos(JobOfferMapper.toJobOfferDtoSet(remoteJobOfferDtos));
         log.info("Number of filtered objects in RemoteJobOffersRetrieverFacade: " + jobOfferDtos.size());
-        jobOfferFacade.saveJobOffers(jobOfferDtos);
-        log.info("Objects have been saved into db");
+        return JobOfferMapper.toJobOfferDtoList(jobOfferFacade.saveJobOffers(jobOfferDtos));
     }
 
     private Set<JobOfferDto> filterRemoteJobOfferDtos(Set<JobOfferDto> jobOfferDtos) {

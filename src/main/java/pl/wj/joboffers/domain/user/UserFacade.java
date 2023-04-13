@@ -1,6 +1,7 @@
 package pl.wj.joboffers.domain.user;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.wj.joboffers.domain.user.model.User;
@@ -12,6 +13,7 @@ import pl.wj.joboffers.exception.definition.ResourceNotFoundException;
 
 @RequiredArgsConstructor
 @Component
+@Log4j2
 public class UserFacade {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;

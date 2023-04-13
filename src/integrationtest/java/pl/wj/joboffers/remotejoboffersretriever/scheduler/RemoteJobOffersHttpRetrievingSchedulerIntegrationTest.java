@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import pl.wj.joboffers.BaseIntegrationTest;
 import pl.wj.joboffers.JobOffersApplication;
 import pl.wj.joboffers.domain.joboffer.JobOfferFacade;
-import pl.wj.joboffers.remotejoboffersretriever.http.RemoteJobOffersRetrieverIntegrationTestHelper;
+import pl.wj.joboffers.remotejoboffersretriever.RemoteJobOffersRetrieverIntegrationTestHelper;
 import pl.wj.joboffers.infrastructure.remotejoboffersretriever.http.RemoteJobOffersRetriever;
 import pl.wj.joboffers.domain.remotejoboffersretriever.dto.RemoteJobOfferDto;
 

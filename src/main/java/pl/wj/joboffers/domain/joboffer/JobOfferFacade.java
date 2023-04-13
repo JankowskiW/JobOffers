@@ -20,10 +20,10 @@ import java.util.Set;
 public class JobOfferFacade {
     private final JobOfferRepository jobOfferRepository;
 
-    public void saveJobOffers(Set<JobOfferDto> jobOfferDtos) {
+    public List<JobOffer> saveJobOffers(Set<JobOfferDto> jobOfferDtos) {
         Set<JobOffer> jobOffers = JobOfferMapper.toJobOffersSet(jobOfferDtos);
-        jobOfferRepository.saveAll(jobOffers);
         log.info("Number of inserted job offers into database: " + jobOffers.size());
+        return jobOfferRepository.saveAll(jobOffers);
     }
 
     public List<JobOfferResponseDto> getAllJobOffers() {

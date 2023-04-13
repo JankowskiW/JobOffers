@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JobOfferMapper {
-
     public static JobOffer toJobOffer(JobOfferRequestDto jobOfferRequestDto) {
         return JobOffer
                 .builder()
@@ -23,8 +22,6 @@ public class JobOfferMapper {
                 .offerUrl(jobOfferRequestDto.offerUrl())
                 .build();
     }
-
-
     public static Set<JobOffer> toJobOffersSet(Set<JobOfferDto> jobOfferDtos) {
         return jobOfferDtos.stream().map(JobOfferMapper::toJobOffer).collect(Collectors.toSet());
     }
@@ -40,8 +37,7 @@ public class JobOfferMapper {
                 .build();
     }
 
-
-    public static Set<JobOfferDto> toJobOfferDtosSet(Set<RemoteJobOfferDto> remoteJobOfferDtos) {
+    public static Set<JobOfferDto> toJobOfferDtoSet(Set<RemoteJobOfferDto> remoteJobOfferDtos) {
         return remoteJobOfferDtos.stream().map(JobOfferMapper::toJobOfferDto).collect(Collectors.toSet());
     }
 
@@ -55,7 +51,6 @@ public class JobOfferMapper {
                 .build();
     }
 
-
     public static List<JobOfferResponseDto> toJobOfferResponseDtoList(List<JobOffer> jobOffers) {
         return jobOffers.stream().map(JobOfferMapper::toJobOfferResponseDto).collect(Collectors.toList());
     }
@@ -67,6 +62,33 @@ public class JobOfferMapper {
                 .company(jobOffer.company())
                 .salary(jobOffer.salary())
                 .offerUrl(jobOffer.offerUrl())
+                .build();
+    }
+
+    public static List<JobOfferDto> toJobOfferDtoList(List<JobOffer> jobOffers) {
+        return jobOffers.stream().map(JobOfferMapper::toJobOfferDto).collect(Collectors.toList());
+    }
+
+    public static JobOfferDto toJobOfferDto(JobOffer jobOffer) {
+        return JobOfferDto
+                .builder()
+                .title(jobOffer.title())
+                .company(jobOffer.company())
+                .salary(jobOffer.salary())
+                .offerUrl(jobOffer.offerUrl())
+                .build();
+    }
+
+    public static List<RemoteJobOfferDto> toRemoteJobOfferDtoList(List<JobOfferDto> jobOfferDtos) {
+        return jobOfferDtos.stream().map(JobOfferMapper::toRemoteJobOfferDto).collect(Collectors.toList());
+    }
+
+    public static RemoteJobOfferDto toRemoteJobOfferDto(JobOfferDto jobOfferDto) {
+        return RemoteJobOfferDto.builder()
+                .company(jobOfferDto.company())
+                .title(jobOfferDto.title())
+                .salary(jobOfferDto.salary())
+                .offerUrl(jobOfferDto.offerUrl())
                 .build();
     }
 }

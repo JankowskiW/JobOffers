@@ -16,6 +16,7 @@ public class RemoteJobOffersRetrievingScheduler {
     private final RemoteJobOffersRetrieverFacade remoteJobOffersRetrieverFacade;
 
     @Scheduled(fixedDelayString = "${job-offers.http.client.config.scheduler.delay}")
+//    public List<JobOfferDto> retrieveRemoteJobOfferDtos() {
     public void retrieveRemoteJobOfferDtos() {
         Set<RemoteJobOfferDto> remoteJobOfferDtos = remoteJobOffersRetrieverFacade.retrieveRemoteJobOfferDtos();
         log.info("Number of retrieved records from remote repository: " + remoteJobOfferDtos.size());
