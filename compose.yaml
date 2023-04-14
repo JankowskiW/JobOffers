@@ -26,7 +26,7 @@ services:
   redis:
     image: redis
     ports:
-      - "63792:6397"
+      - "6397:6397"
     restart: always
 
   redis-commander:

@@ -34,13 +34,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeHttpRequests((authz) -> authz
-                    .requestMatchers("/swagger-ui/**").permitAll()
-                    .requestMatchers("/v3/api-docs/**").permitAll()
-                    .requestMatchers("/webjars/**").permitAll()
-                    .requestMatchers("/user/login/**").permitAll()
-                    .requestMatchers("/user/register/**").permitAll()
-                    .requestMatchers("/swagger-resources/**").permitAll()
-                    .anyRequest().authenticated())
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
+                        .requestMatchers("/webjars/**").permitAll()
+                        .requestMatchers("/user/login/**").permitAll()
+                        .requestMatchers("/user/register/**").permitAll()
+                        .requestMatchers("/swagger-resources/**").permitAll()
+                        .anyRequest().authenticated())
                 .headers().frameOptions().disable()
                 .and().httpBasic().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
