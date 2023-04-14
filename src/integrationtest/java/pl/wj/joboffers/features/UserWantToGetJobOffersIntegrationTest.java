@@ -246,12 +246,56 @@ public class UserWantToGetJobOffersIntegrationTest  extends BaseIntegrationTest 
 
         // step 13: Authenticated user tried to create new job offer but url he sent already exists in db and
         //          system should return CONFLICT(409)
+        // given
+        String newOfferBodyWithExistingUrl = helper.createNewOfferBody(0);
+        // when
+        ResultActions addOfferFailedResult = mockMvc.perform(
+                post(OFFERS_URL)
+                        .content(newOfferBodyWithExistingUrl)
+                        .header("Authorization", token)
+                        .contentType(CONTENT_TYPE));
+        // then
+        addOfferFailedResult.andExpect(status().isConflict());
 
         // step 14: Authenticated user tried to create new job offer and he sent correct body with url that does not
         //          exist in db yet and server should return CREATED(201) and body with created offer
+        // given
+        int index = 4;
+        String newOfferBody = helper.createNewOfferBody(index);
+        JobOfferResponseDto expectedNewJobOfferResponse = helper.createNewJobOfferResponseDto(index);
+        // when
+        ResultActions addOfferResult = mockMvc.perform(
+                post(OFFERS_URL)
+                        .content(newOfferBody)
+                        .header("Authorization", token)
+                        .contentType(CONTENT_TYPE));
+        // then
+        MvcResult addOfferResponse = addOfferResult.andExpect(status().isCreated()).andReturn();
+        String addOfferResponseJson = addOfferResponse.getResponse().getContentAsString();
+        JobOfferResponseDto newJobOfferResponse = objectMapper.readValue(addOfferResponseJson, JobOfferResponseDto.class);
+        assertAll(
+                () -> assertThat(newJobOfferResponse.title()).isEqualTo(expectedNewJobOfferResponse.title()),
+                () -> assertThat(newJobOfferResponse.company()).isEqualTo(expectedNewJobOfferResponse.company()),
+                () -> assertThat(newJobOfferResponse.salary()).isEqualTo(expectedNewJobOfferResponse.salary()),
+                () -> assertThat(newJobOfferResponse.offerUrl()).isEqualTo(expectedNewJobOfferResponse.offerUrl())
+        );
 
         // step 15: Authenticated user tried to get job offers after he added new offer and system should return OK(200)
         //          and list with 5 offers
+        // given
+        numberOfOffers = 5;
+        // when
+        ResultActions fiveOffersRequest =
+                mockMvc.perform(get(OFFERS_URL)
+                        .header("Authorization", token)
+                        .contentType(CONTENT_TYPE));
+        // then
+        MvcResult fiveOffersResponse = fiveOffersRequest.andExpect(status().isOk()).andReturn();
+        String fiveOffersResponseJson = fiveOffersResponse.getResponse().getContentAsString();
+        jobOfferResponseDtoList = objectMapper.readValue(fiveOffersResponseJson, new TypeReference<>(){});
+        assertThat(jobOfferResponseDtoList)
+                .isNotNull()
+                .hasSize(numberOfOffers);
 
         // step 16: User with expired JWT token tried to get job offers and system should return FORBIDDEN(403)
 

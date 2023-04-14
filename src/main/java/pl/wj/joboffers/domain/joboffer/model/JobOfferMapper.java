@@ -91,4 +91,23 @@ public class JobOfferMapper {
                 .offerUrl(jobOfferDto.offerUrl())
                 .build();
     }
+
+    public static JobOfferRequestDto toJobOfferRequestDto(RemoteJobOfferDto remoteJobOfferDto) {
+        return JobOfferRequestDto.builder()
+                .title(remoteJobOfferDto.title())
+                .company(remoteJobOfferDto.company())
+                .salary(remoteJobOfferDto.salary())
+                .offerUrl(remoteJobOfferDto.offerUrl())
+                .build();
+    }
+
+    public static JobOfferResponseDto toJobOfferResponseDto(RemoteJobOfferDto remoteJobOfferDto) {
+        return JobOfferResponseDto.builder()
+                .id("")
+                .title(remoteJobOfferDto.title())
+                .company(remoteJobOfferDto.company())
+                .salary(remoteJobOfferDto.salary())
+                .offerUrl(remoteJobOfferDto.offerUrl())
+                .build();
+    }
 }

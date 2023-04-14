@@ -2,7 +2,9 @@ package pl.wj.joboffers.domain.joboffer.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 
+@Builder
 public record JobOfferRequestDto(
         @NotBlank(message = "{job-offer.title.not-blank}")
         String title,
