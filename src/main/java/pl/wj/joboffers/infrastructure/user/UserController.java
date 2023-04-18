@@ -17,7 +17,7 @@ import pl.wj.joboffers.infrastructure.security.model.dto.JwtResponseDto;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
     private final UserFacade userFacade;
     private final SecurityFacade securityFacade;
