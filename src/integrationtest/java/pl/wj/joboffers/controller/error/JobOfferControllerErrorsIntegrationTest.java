@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class JobOfferControllerExceptionsIntegrationTest extends BaseIntegrationTest {
+public class JobOfferControllerErrorsIntegrationTest extends BaseIntegrationTest {
     private static final String CONTENT_TYPE = MediaType.APPLICATION_JSON_VALUE;
     private static final String OFFERS_URL = "/job-offers";
 
