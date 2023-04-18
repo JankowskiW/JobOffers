@@ -30,15 +30,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UserWantToGetJobOffersIntegrationTest  extends BaseIntegrationTest {
     @Autowired
     private UserWantToGetJobOffersHelper helper;
-//    @Autowired
-//    private RemoteJobOffersRetrievingScheduler remoteJobOffersRetrievingScheduler;
     @Autowired
     private RemoteJobOffersRetrieverFacade remoteJobOffersRetrieverFacade;
 
     private static final String CONTENT_TYPE = MediaType.APPLICATION_JSON_VALUE;
     private static final String JWT_REGEX = "^([A-Za-z0-9-_=]+\\.)+([A-Za-z0-9-_=])+\\.?$";
-    private static final String REGISTER_URL = "/user/register";
-    private static final String LOGIN_URL = "/user/login";
+    private static final String USERS_URL = "/users";
+    private static final String REGISTER_URL = USERS_URL + "/register";
+    private static final String LOGIN_URL = USERS_URL + "/login";
     private static final String OFFERS_URL = "/job-offers";
     private static final String REMOTE_OFFERS_URL = "/offers";
     private static final String USER_NAME = "user";

@@ -13,13 +13,15 @@ import java.time.ZoneId;
 @Configuration
 @Profile("integration")
 public class IntegrationConfig {
-
     @Bean
     @Primary
-    AdjustableClock clock() { // TODO: Change Clock to AdjustableClock
-        LocalDate localDate = LocalDate.of(2023, 3, 1);
-        LocalTime localTime = LocalTime.of(12,0);
+    AdjustableClock clock() {
+
+//        LocalDate localDate = LocalDate.of(2023, 3, 1);
+//        LocalTime localTime = LocalTime.of(12,0);
         ZoneId zoneId = ZoneId.systemDefault();
+        LocalDate localDate = LocalDate.now(zoneId).minusDays(1);
+        LocalTime localTime = LocalTime.now(zoneId);
         return AdjustableClock.ofLocalDateAndLocalTime(localDate, localTime, zoneId);
     }
 
