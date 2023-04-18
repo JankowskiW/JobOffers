@@ -40,9 +40,6 @@ public class JobOfferFacade {
     }
 
     public JobOfferResponseDto addJobOffer(JobOfferRequestDto jobOfferRequestDto) {
-//        if (jobOfferRepository.existsByOfferUrl(jobOfferRequestDto.offerUrl()))
-//            throw new ResourceAlreadyExistsException(
-//                    String.format("Job offer with url %s already exists", jobOfferRequestDto.offerUrl()));
         JobOffer jobOffer = JobOfferMapper.toJobOffer(jobOfferRequestDto);
         return JobOfferMapper.toJobOfferResponseDto(jobOfferRepository.save(jobOffer));
     }
