@@ -60,6 +60,4 @@ class UserFacadeTest {
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("User not found");
     }
-
-
 }
