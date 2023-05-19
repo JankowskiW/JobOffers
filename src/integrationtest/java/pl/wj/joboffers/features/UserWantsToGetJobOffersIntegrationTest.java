@@ -27,9 +27,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class UserWantToGetJobOffersIntegrationTest  extends BaseIntegrationTest {
+public class UserWantsToGetJobOffersIntegrationTest extends BaseIntegrationTest {
     @Autowired
-    private UserWantToGetJobOffersHelper helper;
+    private UserWantsToGetJobOffersHelper helper;
     @Autowired
     private RemoteJobOffersRetrieverFacade remoteJobOffersRetrieverFacade;
 

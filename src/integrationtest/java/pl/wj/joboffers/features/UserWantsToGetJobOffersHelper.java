@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-class UserWantToGetJobOffersHelper {
+class UserWantsToGetJobOffersHelper {
     private final ObjectMapper objectMapper;
 
     private final List<RemoteJobOfferDto> remoteJobOfferDtos = new ArrayList<>() {
