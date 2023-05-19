@@ -296,11 +296,7 @@ public class UserWantsToGetJobOffersIntegrationTest extends BaseIntegrationTest 
                 .isNotNull()
                 .hasSize(numberOfOffers);
 
-        // step 16: User with expired JWT token tried to get job offers and system should return FORBIDDEN(403)
-
-
-
-        // step 17: User tried to create account with username that already exists and system should return CONFLICT(409)
+        // step 16: User tried to create account with username that already exists and system should return CONFLICT(409)
         // given && when
         ResultActions failedRegisterRequest = mockMvc.perform(
                 post(REGISTER_URL)
