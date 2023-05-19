@@ -25,6 +25,12 @@ public class UserControllerErrorsIntegrationTest extends BaseIntegrationTest {
                     "password" : "pswd"
                 }
                 """.trim();
+    private static final String LOGIN_REQUEST_BODY = """
+                {
+                    "username" : "fake-username",
+                    "password" : "password"
+                }
+                """.trim();
 
     @Container
     public static final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
@@ -56,7 +62,7 @@ public class UserControllerErrorsIntegrationTest extends BaseIntegrationTest {
     @Test
     void shouldReturnNotFoundWhenUserDoesNotExistInDatabase() throws Exception {
         // given
-        RequestBuilder loginRequestBuilder = post(LOGIN_URL).content(REQUEST_BODY).contentType(CONTENT_TYPE);
+        RequestBuilder loginRequestBuilder = post(LOGIN_URL).content(LOGIN_REQUEST_BODY).contentType(CONTENT_TYPE);
         // when
         ResultActions loginResultAction = mockMvc.perform(loginRequestBuilder);
         // then
